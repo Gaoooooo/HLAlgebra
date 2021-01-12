@@ -1,0 +1,71 @@
+class SimpleRegression {
+
+    constructor() { }
+
+    //pass 2xn matrix, first row observed second row dependent 
+    fit(a) {
+
+        //covxy = ssxy = sum(xy) - (1/n)(sum x)(sum y)
+        //varxy = ssxx = sum (x^2)  - (1/n)(sumx)^2 
+
+        let sum_x = mathjs.sum(a.row(0).toArray());
+        let sum_y = mathjs.sum(a.val[1]);
+
+        //get sum of x*y (dot product)
+        let sum_xy = 0;
+        let n = a.cols;
+        for (let i = 0; i < a.cols; i++) {
+            sum_xy += ((a.row(0).val[0][i]) * (a.row(1).val[0][i]))
+        }
+        //get the numerator, note: not actually covariance
+        let cov_xy = sum_xy - ((1 / n) * (sum_x) * (sum_y));
+
+        //get sum x*x
+        let sum_xx = 0;
+        for (let k = 0; k < a.cols; k++) {
+            sum_xx += (mathjs.sum(a.val[0][k]) * mathjs.sum(a.val[0][k]))
+        }
+
+        let var_xy = sum_xx - ((1 / n) * (sum_x) * (sum_x));
+
+        //slope part of line formula
+        let beta = cov_xy / var_xy;
+        this.beta = beta;
+
+        //get the mean for forming the full line 
+        let y_mean = mathjs.sum(a.val[1]) * (1 / n);
+        let x_mean = mathjs.sum(a.val[0]) * (1 / n);
+
+        //alpha (y intercept)
+        let alpha = y_mean - (beta * x_mean);
+        this.alpha = alpha;
+
+        return this;
+
+    }
+
+    log() {
+        print("Slope: " + this.beta + '\n');
+        print("y-intercept: " + this.alpha + '\n');
+
+        print("The line's euqation is y =" + this.beta + "*x" + this.alpha);
+
+        if (this.result) {
+            print("Prediction result: " + this.result);
+        }
+
+        return this;
+    }
+    //function for selecting num decimals?
+
+    predict(a) {
+        let result = a.clone();
+        for (let i = 0; i < a.cols; i++) {
+            result.val[0][i] = (this.beta) * (a.val[0][i]) + this.alpha
+        }
+        this.result = result;
+
+        return this;
+
+    }
+}
