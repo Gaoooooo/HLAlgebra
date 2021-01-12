@@ -1,4 +1,4 @@
 {
   "name":"HLAlgebra",
-  "includes" : ["linear_regression"]
+  "includes" : ["SimpleRegression"]
 }
