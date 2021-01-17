@@ -1,4 +1,4 @@
-# AAA
+# {name}
 
 A collection of 
 ## Quick Start
