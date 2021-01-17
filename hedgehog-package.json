@@ -1,5 +1,5 @@
 {
   "name":"HLAlgebra",
   "includes" : ["SimpleRegression"],
-  "includes" : ["BinaryHeap"],
+  "includes" : ["BinaryHeap"]
 }
