@@ -1,7 +1,6 @@
 # HLAlgebra
 
-A collection of machine learning and linear algebra algorithms for Hedgehog Lab. 
-
+A collection of 
 ## Quick Start
 
 To import HLAlgebra library into Hedgehog Lab:
